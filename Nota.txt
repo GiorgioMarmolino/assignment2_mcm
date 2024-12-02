@@ -1,0 +1,13 @@
+Q1.1 Define all the model matrices, by filling the structures in the BuildTree() function.
+
+The extra part you find in the assignment text is a typo.
+
+Here are some requirements to follow when preparing your reports using LaTeX. Following these rules will let us correct your assignments much easier and faster.
+
+-Put in the report all the formulas you used. This allows us to understand if an error is in the understanding or in the implementation.
+-It is important to use the correct LaTeX symbols in the formulas. E.g., vectors should be made distinct from scalars, and vector products ("\times" or "\wedge") from scalar -products ("\cdot"). An asterisk ("*") is generally not used to denote multiplication.
+-It is preferred to describe algorithms using pseudocode, block diagrams and figures rather than long texts.
+-Matlab code should not be included in the report. It should be submitted separately, as required.
+-Avoid overly wordy explanations. Focus on clarifying aspects that are not immediately evident from formulas or figures.
+-Proofread your report to minimize grammar and language errors.
+-Please note that failure to adhere to these requirements may result in a reduction of your grade. These guidelines will take effect starting with Assignment 2.
