@@ -22,7 +22,25 @@ classdef kinematicModel < handle
         % The function update:
         % - J: end-effector jacobian matrix
 
-            % TO DO
+            r0 = [0; 0; 0];
+            for i = 1:self.gm.jointNumber
+                bTi = eye(4);
+                for j = 1:i
+                    bTi = bTi * self.gm.iTj(:, :, j);
+                end
+                r = bTi(1:3, 4);
+                k = bTi(1:3, 3);
+
+                if self.gm.jointType(i) == 0
+                    self.J(1:3, i) = k;
+                    self.J(4:6, i) = cross(k, (r0 - r));
+                elseif self.gm.jointType(i) == 1
+                    self.J(1:3, i) = [0; 0; 0];
+                    self.J(4:6, i) = k;
+                else
+                    error('Joint type not valid');
+                end
+            end
 
             
         end

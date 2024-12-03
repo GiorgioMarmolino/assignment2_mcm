@@ -39,7 +39,26 @@ classdef geometricModel < handle
             % - iTj: vector of matrices containing the transformation matrices from link i to link j for the input q.
             % The size of iTj is equal to (4,4,numberOfLinks)
             
-            %TO DO
+            if length(q) ~= self.jointNumber
+                error('q length not valid')
+            end
+
+            self.q = q;
+            for i = 1:self.jointNumber
+                Ti_0 = self.iTj_0(:, :, i);
+
+                if self.jointType(i) == 0
+                    R = [cos(q(i)), -sin(q(i)), 0;
+                         sin(q(i)), cos(q(i)),  0;
+                         0,         0,          1];
+                    self.iTj(:, :, i) = Ti_0 * [R, [0; 0; 0]; 0, 0, 0, 1];
+                elseif self.jointType(i) == 1
+                    T = [0; 0; q(i)];
+                    self.iTj(:, :, i) = Ti_0 * [eye(3, 3), T; 0, 0, 0, 1];
+                else
+                    error('Joint type not valid');
+                end
+            end
         end
         function [bTk] = getTransformWrtBase(self,k)
             %% GetTransformatioWrtBase function
@@ -49,7 +68,15 @@ classdef geometricModel < handle
             % bTk : transformation matrix from the manipulator base to the k-th joint in
             % the configuration identified by iTj.
 
-            %TO DO
+            if k > self.jointNumber || k < 1
+                error('K not valid');
+            end
+
+            bTk = eye(4);
+
+            for i = 1:k
+                bTk = bTk * self.iTj(:, :, i);
+            end
         end
 
     end
