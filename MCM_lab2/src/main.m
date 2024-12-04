@@ -25,6 +25,17 @@ bTe = geometricModel.getTransformWrtBase(length(jointType));
 disp('bTe')
 disp(bTe)
 
+%Compute the transformation of the 3 w.r.t 5
+T = geometricModel.getTransformWrt(3, 5);
+%T = inv(T);
+Rt = T(1:3, 1:3)';
+Ti= -Rt*T(1:3,4);
+T2 = [Rt, Ti; 0, 0, 0, 1];
+disp('3T5')
+disp(T)
+disp('5T3')
+disp(T2)
+
 %% Given the previous joint configuration compute the Jacobian matrix of the manipulator
 km = kinematicModel(geometricModel);
 km.updateJacobian()
@@ -79,7 +90,7 @@ for i = 1:samples
     % Updating transformation matrices for the new configuration 
     geometricModel.updateDirectGeometry(q)
     % Get the transformation matrix from base to the tool
-    bTe = geometricModel.getTransformWrtBase(length(jointType)); 
+    bTe = geometricModel.getTransformWrtBase(length(jointType));
 
     %% ... Plot the motion of the robot 
     if (rem(i,0.1) == 0) % only every 0.1 sec

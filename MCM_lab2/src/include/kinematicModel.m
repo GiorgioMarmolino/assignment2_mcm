@@ -21,8 +21,9 @@ classdef kinematicModel < handle
         %% Update Jacobian function
         % The function update:
         % - J: end-effector jacobian matrix
-
-            r0 = [0; 0; 0];
+            
+            bTe = self.gm.getTransformWrtBase(self.gm.jointNumber);
+            re = bTe(1:3, 4);
             for i = 1:self.gm.jointNumber
                 bTi = eye(4);
                 for j = 1:i
@@ -33,7 +34,7 @@ classdef kinematicModel < handle
 
                 if self.gm.jointType(i) == 0
                     self.J(1:3, i) = k;
-                    self.J(4:6, i) = cross(k, (r0 - r));
+                    self.J(4:6, i) = cross(k, (re - r));
                 elseif self.gm.jointType(i) == 1
                     self.J(1:3, i) = [0; 0; 0];
                     self.J(4:6, i) = k;

@@ -78,6 +78,27 @@ classdef geometricModel < handle
                 bTk = bTk * self.iTj(:, :, i);
             end
         end
+        function [sTk] = getTransformWrt(self, s, k)
+             %% GetTransformatioWrt function
+            % Inputs :
+            % k: the idx for which computing the transformation matrix
+            % outputs
+            % bTk : transformation matrix from the manipulator base to the k-th joint in
+            % the configuration identified by iTj.
+
+            if k > self.jointNumber || k < 1
+                error('K not valid');
+            end
+            if s > k || s < 1
+                error('s not valid');
+            end
+
+            sTk = eye(4);
+
+            for i = (s+1):k
+                sTk = sTk * self.iTj_0(:, :, i);
+            end
+        end
 
     end
 end
