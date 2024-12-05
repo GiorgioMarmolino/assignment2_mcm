@@ -43,6 +43,9 @@ classdef kinematicModel < handle
                 end
             end
 
+            self.J(abs(self.J) < 1e-6) = 0;
+            self.J(abs(self.J - 1) < 1e-6) = 1;
+            self.J(abs(self.J + 1) < 1e-6) = -1;
             
         end
     end

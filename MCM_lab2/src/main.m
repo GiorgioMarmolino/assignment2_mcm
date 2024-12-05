@@ -16,6 +16,7 @@ geometricModel = geometricModel(iTj_0,jointType);
 % Compute iTj : transformation between the base of the joint <i>
 % and its end-effector taking into account the actual rotation/traslation of the joint
 q = [pi/4, -pi/4, 0, -pi/4, 0, 0.15, pi/4];
+% q = [0, 0, 0, 0, 0, 0, 0];
 geometricModel.updateDirectGeometry(q)
 disp('iTj')
 disp(geometricModel.iTj);

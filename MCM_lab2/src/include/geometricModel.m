@@ -59,6 +59,10 @@ classdef geometricModel < handle
                     error('Joint type not valid');
                 end
             end
+
+            self.iTj(abs(self.iTj) < 1e-6) = 0;
+            self.iTj(abs(self.iTj - 1) < 1e-6) = 1;
+            self.iTj(abs(self.iTj + 1) < 1e-6) = -1;
         end
         function [bTk] = getTransformWrtBase(self,k)
             %% GetTransformatioWrtBase function
@@ -77,6 +81,10 @@ classdef geometricModel < handle
             for i = 1:k
                 bTk = bTk * self.iTj(:, :, i);
             end
+
+            bTk(abs(bTk) < 1e-6) = 0;
+            bTk(abs(bTk - 1) < 1e-6) = 1;
+            bTk(abs(bTk + 1) < 1e-6) = -1;
         end
         function [sTk] = getTransformWrt(self, s, k)
              %% GetTransformatioWrt function
