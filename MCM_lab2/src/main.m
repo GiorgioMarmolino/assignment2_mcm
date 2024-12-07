@@ -28,10 +28,7 @@ disp(bTe)
 
 %Compute the transformation of the 3 w.r.t 5
 T = geometricModel.getTransformWrt(3, 5);
-%T = inv(T);
-Rt = T(1:3, 1:3)';
-Ti= -Rt*T(1:3,4);
-T2 = [Rt, Ti; 0, 0, 0, 1];
+T2 = inv(T);
 disp('3T5')
 disp(T)
 disp('5T3')
