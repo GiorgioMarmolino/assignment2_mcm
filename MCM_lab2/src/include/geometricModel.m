@@ -104,7 +104,7 @@ classdef geometricModel < handle
             sTk = eye(4);
 
             for i = (s+1):k
-                sTk = sTk * self.iTj_0(:, :, i);
+                sTk = sTk * self.iTj(:, :, i);
             end
         end
 
