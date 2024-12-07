@@ -29,6 +29,8 @@ classdef geometricModel < handle
                 error('Not enough input arguments (iTj_0) (jointType)')
             end
         end
+
+        %% METHOD - UPDATE DIRECT GEOMETRY
         function updateDirectGeometry(self, q)
             %%% GetDirectGeometryFunction
             % This method update the matrices iTj.
@@ -38,6 +40,7 @@ classdef geometricModel < handle
             % The function updates:
             % - iTj: vector of matrices containing the transformation matrices from link i to link j for the input q.
             % The size of iTj is equal to (4,4,numberOfLinks)
+            
             
             if length(q) ~= self.jointNumber
                 error('q length not valid')
@@ -64,8 +67,14 @@ classdef geometricModel < handle
             self.iTj(abs(self.iTj - 1) < 1e-6) = 1;
             self.iTj(abs(self.iTj + 1) < 1e-6) = -1;
         end
+
+
+
+
+
+        %% METHOD - GET TRANSFORMATION WRTBASE 
         function [bTk] = getTransformWrtBase(self,k)
-            %% GetTransformatioWrtBase function
+            
             % Inputs :
             % k: the idx for which computing the transformation matrix
             % outputs
@@ -86,8 +95,15 @@ classdef geometricModel < handle
             bTk(abs(bTk - 1) < 1e-6) = 1;
             bTk(abs(bTk + 1) < 1e-6) = -1;
         end
+
+
+
+
+
+
+        %% METHOD - GET TRANSFORMATION WRT
         function [sTk] = getTransformWrt(self, s, k)
-             %% GetTransformatioWrt function
+             
             % Inputs :
             % k: the idx for which computing the transformation matrix
             % outputs
