@@ -48,18 +48,36 @@ classdef geometricModel < handle
 
             self.q = q;
             for i = 1:self.jointNumber
+
+                % switch expression
+                % case value1
+                % % Codice da eseguire se expression è uguale a value1
+                % case value2
+                % % Codice da eseguire se expression è uguale a value2
+                % % Puoi aggiungere più case
+                % otherwise
+                % % Codice da eseguire se nessun case corrisponde a expression
+                % end
+
+
+
+
+
                 Ti_0 = self.iTj_0(:, :, i);
 
-                if self.jointType(i) == 0
+                if self.jointType(i) == 0 % Revolut Joint case
                     R = [cos(q(i)), -sin(q(i)), 0;
                          sin(q(i)), cos(q(i)),  0;
                          0,         0,          1];
                     self.iTj(:, :, i) = Ti_0 * [R, [0; 0; 0]; 0, 0, 0, 1];
-                elseif self.jointType(i) == 1
+
+                elseif self.jointType(i) == 1 % Prismatic Joint case
+                    
                     T = [0; 0; q(i)];
                     self.iTj(:, :, i) = Ti_0 * [eye(3, 3), T; 0, 0, 0, 1];
+
                 else
-                    error('Joint type not valid');
+                    error('Joint type not valid'); %error case
                 end
             end
 
