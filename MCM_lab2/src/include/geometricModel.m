@@ -49,20 +49,6 @@ classdef geometricModel < handle
             self.q = q;
             for i = 1:self.jointNumber
 
-                % switch expression
-                % case value1
-                % % Codice da eseguire se expression è uguale a value1
-                % case value2
-                % % Codice da eseguire se expression è uguale a value2
-                % % Puoi aggiungere più case
-                % otherwise
-                % % Codice da eseguire se nessun case corrisponde a expression
-                % end
-
-
-
-
-
                 Ti_0 = self.iTj_0(:, :, i);
 
                 if self.jointType(i) == 0 % Revolut Joint case
