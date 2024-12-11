@@ -47,6 +47,10 @@ classdef kinematicModel < handle
             self.J(abs(self.J - 1) < 1e-6) = 1;
             self.J(abs(self.J + 1) < 1e-6) = -1;
             
+            minrank = min(size(self.J));
+            if rank(self.J) < minrank
+                disp('Singular configuration')
+            end
         end
     end
 end
